@@ -1,0 +1,88 @@
+//Q1. Define a class Calculator
+
+package javabasic;
+import java.util.*;
+public class Calculator {
+	int result;
+	static int operationCount;
+	void  add(int a,int b) {
+		result=a+b;
+		operationCount++;
+		System.out.println("sum: "+result);
+		
+	}
+	static void displayoperationCount() {
+		System.out.println("number of operations :"+operationCount);
+	}
+	public static void main(String[] args) {
+		displayoperationCount();
+		Calculator a=new Calculator();
+		a.add(10,30);
+		a.add(45,93);
+		displayoperationCount();
+		
+	}
+	
+}
+------------------------------------------------
+
+
+//Q2. Create a class BankAccount with private balance and methods to deposit and
+//getBalance.
+package javabasic;
+import java.util.*;
+class BankAccount{
+	private  int balance=0;
+	public void deposite(int amount) {
+		if(amount>0) {
+		balance+=amount;
+		System.out.println("amt deposited"+balance);
+		}
+	}
+	public int getvalue() {
+		return balance;
+	}
+	
+}
+public class assignment7 {
+	public static void main(String[] args) {
+		BankAccount a=new BankAccount();
+		System.out.println(a.getvalue());	
+		a.deposite(20000);
+		System.out.println(a.getvalue());
+		//System.out.println(a.balance());
+		
+		
+	}
+}
+
+
+--------------------------------------------------------
+
+//Q3. Create a class Student with roll number and name. Initialize it using a
+//parameterized constructor. Add another constructor to initialize with roll number only
+//and name as &quot;Unknown&quot;. Print both using a display method.
+package javabasic;
+class Student{
+	int rollno;
+	String name;
+	public Student(int rollno,String name) {
+		this.name=name;
+		this.rollno=rollno;
+	}
+	public Student(int rollno) {
+		this.name="unknown";
+		this.rollno=rollno;
+	}
+	public void display() {
+		System.out.println("name:"+name+" rollno:"+rollno);
+	}
+}
+public class assignmentd7 {
+	public static void main(String[] args) {
+		Student a=new Student(10,"selva");
+		a.display();
+		Student a1=new Student(53);
+		a1.display();
+	}
+}
