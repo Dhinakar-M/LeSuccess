@@ -6,7 +6,6 @@ public class ArraysAssignment {
         Scanner sc = new Scanner(System.in); 
          
         // Problem 1: Search for an Element 
-        System.out.println(“ Search for an Element"); 
         System.out.print("Enter size of array: "); 
         int n1 = sc.nextInt(); 
         int[] arr1 = new int[n1]; 
@@ -35,8 +34,7 @@ public class ArraysAssignment {
          
 -----------------------------------------------------------
          
-        // Problem 2: Duplicate Elements 
-        System.out.println("Duplicate Elements"); 
+        // Problem 2: Duplicate Elements  
         System.out.print("Enter number of elements: "); 
         int n2 = sc.nextInt(); 
         int[] arr2 = new int[n2]; 
@@ -78,7 +76,6 @@ public class ArraysAssignment {
 ----------------------------------------------------------------------
          
         // Problem 3: Left Rotation by K Positions 
-        System.out.println("Left Rotation by K Positions"); 
         System.out.print("Enter size of array: "); 
         int n3 = sc.nextInt(); 
         int[] arr3 = new int[n3]; 
