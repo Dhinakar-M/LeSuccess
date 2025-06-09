@@ -1,0 +1,109 @@
+1. N-Queens Problem
+import java.util.*;
+
+class Solution {
+    public List<List<String>> solveNQueens(int n) {
+        List<List<String>> res = new ArrayList<>();
+        char[][] board = new char[n][n];
+
+        for (char[] row : board)
+            Arrays.fill(row, '.');
+
+        boolean[] cols = new boolean[n];           
+        boolean[] diag1 = new boolean[2 * n - 1];  
+        boolean[] diag2 = new boolean[2 * n - 1];   
+
+        backtrack(0, board, res, cols, diag1, diag2, n);
+        return res;
+    }
+
+    private void backtrack(int row, char[][] board, List<List<String>> res,
+                           boolean[] cols, boolean[] diag1, boolean[] diag2, int n) {
+        if (row == n) {
+            List<String> solution = new ArrayList<>();
+            for (char[] r : board)
+                solution.add(new String(r));
+            res.add(solution);
+            return;
+        }
+
+        for (int col = 0; col < n; col++) {
+            int d1 = row - col + n - 1;
+            int d2 = row + col;
+
+            if (cols[col] || diag1[d1] || diag2[d2])
+                continue;
+
+            board[row][col] = 'Q';
+            cols[col] = diag1[d1] = diag2[d2] = true;
+
+            backtrack(row + 1, board, res, cols, diag1, diag2, n);
+
+            board[row][col] = '.';
+            cols[col] = diag1[d1] = diag2[d2] = false;
+        }
+    }
+}
+
+2. Rat in a Maze
+import java.util.*;
+class Solution {
+    public List<String> findPath(int[][] maze, int n) {
+        List<String> result = new ArrayList<>();
+        if (maze[0][0] == 0 || maze[n - 1][n - 1] == 0)
+            return result;
+        boolean[][] visited = new boolean[n][n];
+        solve(maze, n, 0, 0, "", visited, result);
+        return result;
+    }
+    private void solve(int[][] maze, int n, int row, int col, String path,
+                       boolean[][] visited, List<String> result) {
+        if (row == n - 1 && col == n - 1) {
+            result.add(path);
+            return;
+        }
+        int[] dRow = {1, 0, 0, -1};
+        int[] dCol = {0, -1, 1, 0};
+        char[] dir = {'D', 'L', 'R', 'U'};
+        visited[row][col] = true;
+        for (int i = 0; i < 4; i++) {
+            int newRow = row + dRow[i];
+            int newCol = col + dCol[i];
+            if (isSafe(maze, visited, n, newRow, newCol)) {
+                solve(maze, n, newRow, newCol, path + dir[i], visited, result);
+            }
+        }
+        visited[row][col] = false; // backtrack
+    }
+    private boolean isSafe(int[][] maze, boolean[][] visited, int n, int row, int col) {
+        return row >= 0 && col >= 0 && row < n && col < n &&
+               maze[row][col] == 1 && !visited[row][col];
+    }
+}
+3. Letter Combinations of a Phone Number
+import java.util.*;
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        List<String> result = new ArrayList<>();
+        if (digits == null || digits.length() == 0) return result;
+        String[] mapping = {
+            "",     "",     "abc",  "def", 
+            "ghi",  "jkl",  "mno",  "pqrs", 
+            "tuv",  "wxyz"
+        };
+        backtrack(result, digits, mapping, new StringBuilder(), 0);
+        return result;
+    }
+    private void backtrack(List<String> result, String digits, String[] mapping, StringBuilder current, int index) {
+        if (index == digits.length()) {
+            result.add(current.toString());
+            return;
+        }
+        String letters = mapping[digits.charAt(index) - '0'];
+        for (char ch : letters.toCharArray()) {
+            current.append(ch);
+            backtrack(result, digits, mapping, current, index + 1);
+            current.deleteCharAt(current.length() - 1); // Backtrack
+        }
+    }
+}
